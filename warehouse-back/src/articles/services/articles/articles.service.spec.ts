@@ -33,14 +33,16 @@ describe('ArticlesService', () => {
     expect(service).toBeDefined();
   });
 
-  describe('should return', () => {
-    it('inserted articles', () => {
-      expect(service.addArticles([null])).toEqual([null]);
+  describe('addArticles', () => {
+    it('should return inserted articles', async () => {
+      expect(await service.addArticles([null])).toEqual([null]);
     });
-    it('thrown exception', () => {
-      expect(service.addArticles([])).toBeInstanceOf(
-        InternalServerErrorException,
-      );
+    it('should return thrown exception', async () => {
+      try {
+        await service.addArticles([]);
+      } catch (error) {
+        expect(error).toBeInstanceOf(InternalServerErrorException);
+      }
     });
   });
 });

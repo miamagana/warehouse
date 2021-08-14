@@ -35,8 +35,8 @@ describe('ArticlesController', () => {
     expect(controller).toBeDefined();
   });
 
-  describe('should return', () => {
-    it('the articles added', async () => {
+  describe('addArticles', () => {
+    it('should return the articles added', async () => {
       const mockArticles: Partial<Article>[] = [
         { art_id: 1, name: 'firstName', stock: 0 },
       ];
@@ -58,7 +58,7 @@ describe('ArticlesController', () => {
       ).toEqual(mockArticles);
       expect(spy).toHaveBeenCalledWith(mockArticles);
     });
-    it('internal server exception', async () => {
+    it('should return internal server exception', async () => {
       try {
         await controller.addArticles(null);
       } catch (error) {

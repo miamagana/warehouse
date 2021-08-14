@@ -16,7 +16,11 @@ export class ProductsController {
 
   @Get('all')
   async getProducts() {
-    return this.productsService.findAll();
+    try {
+      return this.productsService.findAll();
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
   @Post('add')

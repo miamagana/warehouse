@@ -21,7 +21,7 @@ export class ProductsService {
   ) {}
 
   async findAll(): Promise<Product[]> {
-    return this.productModel.find().exec();
+    return await this.productModel.find();
   }
 
   async sellProducts(ids: string[]): Promise<boolean> {
