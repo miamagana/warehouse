@@ -24,11 +24,12 @@ export class ProductsService {
     return await this.productModel.find();
   }
 
-  async sellProducts(ids: string[]): Promise<boolean> {
+  async sellProducts(order: Record<string, number>): Promise<void> {
     try {
+      const ids = Object.keys(order);
       const products = await this.productModel.find({ _id: { $in: ids } });
       if (products) {
-        const articleMap = this.getArticlesOfProducts(products);
+        const articleMap = this.getArticlesOfProducts(products, order);
         const articles = await this.articleModel.find({
           art_id: { $in: [...articleMap.keys()] },
         });
@@ -54,7 +55,6 @@ export class ProductsService {
         });
         if (enoughStock) {
           await this.articleModel.bulkWrite(ops);
-          return enoughStock;
         } else {
           throw new PreconditionFailedException(
             'Not enough stock to satify the request',
@@ -67,24 +67,22 @@ export class ProductsService {
     }
   }
 
-  getArticlesOfProducts(products: Product[]): Map<number, number> {
-    const productArticles = products.map(
-      (prod: Product) => prod.contain_articles,
-    );
-    const articlesFlat: ContainArticles[] = [].concat.apply(
-      [],
-      productArticles,
-    );
+  getArticlesOfProducts(
+    products: Product[],
+    order: Record<string, number>,
+  ): Map<number, number> {
     const articleMap = new Map<number, number>();
-    articlesFlat.forEach(({ art_id, amount_of }) => {
-      if (articleMap.has(art_id)) {
-        const amount = articleMap.get(art_id) + amount_of;
-        articleMap.set(art_id, amount);
-      } else {
-        articleMap.set(art_id, amount_of);
-      }
+    products.forEach((product: Product) => {
+      const multiplier = order[product.id];
+      product.contain_articles.forEach(({ art_id, amount_of }) => {
+        if (articleMap.has(art_id)) {
+          const amount = articleMap.get(art_id) + amount_of * multiplier;
+          articleMap.set(art_id, amount);
+        } else {
+          articleMap.set(art_id, amount_of * multiplier);
+        }
+      });
     });
-
     return articleMap;
   }
 

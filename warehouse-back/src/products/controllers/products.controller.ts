@@ -37,9 +37,9 @@ export class ProductsController {
   }
 
   @Post('sell')
-  async sellProducts(@Body() productsIds: string[]) {
+  async sellProducts(@Body() order: Record<string, number>) {
     try {
-      return this.productsService.sellProducts(productsIds);
+      return this.productsService.sellProducts(order);
     } catch (error) {
       throw new InternalServerErrorException(error);
     }
