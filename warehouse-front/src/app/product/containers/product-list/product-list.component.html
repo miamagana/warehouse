@@ -1,0 +1,11 @@
+<div class="grid">
+  <app-product-card
+    *ngFor="let product of products$ | async"
+    [product]="product"
+    [cart]="(cart$ | async) || {}"
+    (addProduct)="addProductToCart($event)"
+    (removeProduct)="removeProductFromCart($event)"
+  ></app-product-card>
+  <app-create-entities (create)="createProducts($event)"></app-create-entities>
+  <app-order (order)="orderProducts()"></app-order>
+</div>

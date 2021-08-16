@@ -1,0 +1,9 @@
+{
+  "title": "Warehouse",
+  "tooltips": {
+    "products": "Click to see product list",
+    "order": "Click to order",
+    "addProducts": "Click to add products",
+    "articles": "Click to add articles"
+  }
+}

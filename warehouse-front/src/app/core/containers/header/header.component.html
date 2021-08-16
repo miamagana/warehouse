@@ -1,0 +1,18 @@
+<ng-container *transloco="let t">
+  <mat-toolbar>
+    <span>{{ t("title") }}</span>
+    <span class="spacer"></span>
+    <button mat-button [matMenuTriggerFor]="menu">
+      {{ activeLanguage$ | async }}
+    </button>
+    <mat-menu #menu="matMenu">
+      <button
+        mat-menu-item
+        *ngFor="let language of availableLanguajes"
+        (click)="changeLanguage(language)"
+      >
+        {{ language }}
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</ng-container>

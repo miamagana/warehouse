@@ -1,0 +1,22 @@
+<ng-container *transloco="let t">
+  <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>
+      <div class="icons">
+        <app-create-entities
+          [mini]="true"
+          (create)="createArticles($event)"
+        ></app-create-entities>
+        <button
+          mat-icon-button
+          [matTooltip]="t('tooltips.products')"
+          (click)="goToProducts()"
+        >
+          <mat-icon>production_quantity_limits</mat-icon>
+        </button>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content class="example-sidenav-content"
+      ><ng-content></ng-content
+    ></mat-drawer-content>
+  </mat-drawer-container>
+</ng-container>

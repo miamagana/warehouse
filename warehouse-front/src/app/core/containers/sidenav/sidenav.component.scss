@@ -1,0 +1,25 @@
+.example-container {
+  width: 100%;
+  height: calc(100% - 64px);
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  border: none;
+}
+
+.icons {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  > * {
+    margin: 1em;
+    .mat-icon {
+      font-size: xx-large;
+    }
+  }
+}

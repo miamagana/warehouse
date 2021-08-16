@@ -1,0 +1,9 @@
+{
+  "title": "Almacen",
+  "tooltips": {
+    "products": "Clic para ver el listado de productos",
+    "order": "Clic para hacer un pedido",
+    "addProducts": "Clic para añadir productos",
+    "articles": "Clic para añadir articulos"
+  }
+}

@@ -1,0 +1,17 @@
+<input
+  #input
+  hidden="true"
+  type="file"
+  onclick="this.value=null"
+  (change)="fileChange($event)"
+  accept=".json"
+/>
+<button mat-mini-fab (click)="input.click()" *ngIf="mini; else maxi">
+  <mat-icon>add</mat-icon>
+</button>
+
+<ng-template #maxi>
+  <button mat-fab (click)="input.click()">
+    <mat-icon>add</mat-icon>
+  </button>
+</ng-template>
